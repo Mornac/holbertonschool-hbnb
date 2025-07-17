@@ -1,17 +1,35 @@
 #!/bin/bash
 
+# ADMIN TOKEN
+echo -e "\n> Create Admin Token:"
+RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/auth/login -H "Content-Type: application/json" -d '{
+	"email": "admin@hbnb.io",
+	"password": "admin1234"
+}')
+export JWT_ADMIN="$(echo "$RESPONSE" | jq -r '.access_token')"
+echo "Access Token: $JWT_ADMIN"
+
+# AMENITIES CREATION
+echo -e "\n> Create New Amenities:"
+RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/amenities/ -H "Content-Type: application/json" -H "Authorization: Bearer $JWT_ADMIN" -d '{"name": "Parking"}')
+export AMENITY_1="$(echo "$RESPONSE" | jq -r '.id')"
+echo "Amenity ID: $AMENITY_1"
+RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/amenities/ -H "Content-Type: application/json" -H "Authorization: Bearer $JWT_ADMIN" -d '{"name": "Wi-Fi"}')
+export AMENITY_2="$(echo "$RESPONSE" | jq -r '.id')"
+echo "Amenity ID: $AMENITY_2"
+
 # OWNER CREATION
 echo -e "\n> Create New User (Place Owner):"
 RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/users/ -H "Content-Type: application/json" -d '{
 	"first_name": "Johnathan",
 	"last_name": "Doe",
 	"email": "johnathan.doe@example.com",
-	"password": "abcd1234",
-	"is_admin": 1
+	"password": "abcd1234"
 }')
 export OWNER="$(echo "$RESPONSE" | jq -r '.id')"
 echo "Place Owner ID: $OWNER"
 
+# OWNER TOKEN
 echo -e "\n> Create Owner Token:"
 RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/auth/login -H "Content-Type: application/json" -d '{
 	"email": "johnathan.doe@example.com",
@@ -19,15 +37,6 @@ RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/auth/login -H "Content-T
 }')
 export JWT_OWNER="$(echo "$RESPONSE" | jq -r '.access_token')"
 echo "Access Token: $JWT_OWNER"
-
-# AMENITIES CREATION
-echo -e "\n> Create New Amenities:"
-RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/amenities/ -H "Content-Type: application/json" -H "Authorization: Bearer $JWT_OWNER" -d '{"name": "Parking"}')
-export AMENITY_1="$(echo "$RESPONSE" | jq -r '.id')"
-echo "Amenity ID: $AMENITY_1"
-RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/amenities/ -H "Content-Type: application/json" -H "Authorization: Bearer $JWT_OWNER" -d '{"name": "Wi-Fi"}')
-export AMENITY_2="$(echo "$RESPONSE" | jq -r '.id')"
-echo "Amenity ID: $AMENITY_2"
 
 # PLACE CREATION
 echo -e "\n> Create New Place:"
@@ -46,6 +55,7 @@ RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/users/ -H "Content-Type:
 export USER_1="$(echo "$RESPONSE" | jq -r '.id')"
 echo "Reviewing User ID: $USER_1"
 
+# USER 1 TOKEN
 echo -e "\n> Create User Token:"
 RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/auth/login -H "Content-Type: application/json" -d '{
 	"email": "jane.doe@example.com",
@@ -65,6 +75,7 @@ RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/users/ -H "Content-Type:
 export USER_2="$(echo "$RESPONSE" | jq -r '.id')"
 echo "Reviewing User ID: $USER_2"
 
+# USER 2 TOKEN
 echo -e "\n> Create User Token:"
 RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/auth/login -H "Content-Type: application/json" -d '{
 	"email": "john.doe@example.com",
