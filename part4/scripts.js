@@ -48,6 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    document.addEventListener("click", function (e) {
+      if (e.target.classList.contains("details-button")) {
+        const placeCard = e.target.closest(".place-card");
+        const placeId = placeCard?.dataset.id || "1";
+        window.location.href = `place.html?id=${placeId}`;
+      }
+    })
+
     const reviewForm = document.getElementById("review-form");
     if (reviewForm) {
       reviewForm.addEventListener("submit", async (e) => {
@@ -128,6 +136,7 @@ function fetchPlaces() {
         if (!maxPrice || maxPrice === "All" || place.price <= parseInt(maxPrice)) {
           const item = document.createElement("div");
           item.className = "place-card";
+          item.setAttribute("data-id", place.id);
           item.innerHTML = `
             <h2> ${place.title} </h2>
             <p> Description: ${place.description} </p>
@@ -140,6 +149,7 @@ function fetchPlaces() {
             <p> Owner ID: ${place.owner} </p>
             <p> Created at: ${new Date(place.created_at).toLocaleDateString()} </p>
             <p> Updated at: ${new Date(place.updated_at).toLocaleDateString()} </p>
+            <button class="details-button"> View Details </button>
           `;
           container.appendChild(item);
         }
