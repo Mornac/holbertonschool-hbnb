@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS Review (
+CREATE TABLE IF NOT EXISTS reviews (
     id CHAR(36) NOT NULL,
     title TEXT NOT NULL,
     text TEXT NOT NULL,

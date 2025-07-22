@@ -1,4 +1,4 @@
-CREATE TABLE place (
+CREATE TABLE IF NOT EXISTS places (
     id CHAR(36) NOT NULL,
     title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,

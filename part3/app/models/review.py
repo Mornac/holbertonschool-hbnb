@@ -15,10 +15,6 @@ class Review(BaseModel):
     place = db.relationship("Place", back_populates="reviews")
     user = db.relationship("User", back_populates="reviews")
 
-    def save(self):
-        if not (1 <= self.rating <= 5):
-            raise ValueError("Rating must be an integer between 1 and 5")
-
     def __repr__(self):
         return (f"<Review {self.id}")
 
