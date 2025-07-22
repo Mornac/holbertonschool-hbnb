@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS places (
     capacity INTEGER NOT NULL,
     surface FLOAT NOT NULL,
     owner_id CHAR(36) NOT NULL,
+    created_at DATETIME,
+    updated_at DATETIME,
     PRIMARY KEY (id),
-    FOREIGN KEY (owner_id) REFERENCES `user`(id)
+    FOREIGN KEY (owner_id) REFERENCES users(id)
 );

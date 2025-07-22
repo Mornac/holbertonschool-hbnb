@@ -48,8 +48,6 @@ erDiagram
 
     place_amenity {
         UUID place_id FK
-		datetime created_at
-		datetime updated_at
         UUID amenity_id FK
     }
 

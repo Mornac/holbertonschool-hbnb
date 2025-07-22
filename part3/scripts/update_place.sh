@@ -1,17 +1,35 @@
 #!/bin/bash
 
+# ADMIN TOKEN
+echo -e "\n> Create Admin Token:"
+RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/auth/login -H "Content-Type: application/json" -d '{
+	"email": "admin@hbnb.io",
+	"password": "admin1234"
+}')
+export JWT_ADMIN="$(echo "$RESPONSE" | jq -r '.access_token')"
+echo "Access Token: $JWT_ADMIN"
+
+# AMENITIES CREATION
+echo -e "\n> Create New Amenities:"
+RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/amenities/ -H "Content-Type: application/json" -H "Authorization: Bearer $JWT" -d '{"name": "Pool"}')
+export AMENITY_1="$(echo "$RESPONSE" | jq -r '.id')"
+echo "Amenity ID: $AMENITY_1"
+RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/amenities/ -H "Content-Type: application/json" -H "Authorization: Bearer $JWT" -d '{"name": "Garden"}')
+export AMENITY_2="$(echo "$RESPONSE" | jq -r '.id')"
+echo "Amenity ID: $AMENITY_2"
+
 # OWNER CREATION
 echo -e "\n> Create New User:"
 RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/users/ -H "Content-Type: application/json" -d '{
 	"first_name": "John",
 	"last_name": "Doe",
 	"email": "john.doe@example.com",
-	"password": "ABCD1234",
-	"is_admin": 1
+	"password": "ABCD1234"
 }')
 export OWNER="$(echo "$RESPONSE" | jq -r '.id')"
 echo "User ID: $OWNER"
 
+# OWNER TOKEN
 echo -e "\n> Create Token:"
 RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/auth/login -H "Content-Type: application/json" -d '{
 	"email": "john.doe@example.com",
@@ -19,15 +37,6 @@ RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/auth/login -H "Content-T
 }')
 export JWT="$(echo "$RESPONSE" | jq -r '.access_token')"
 echo "Access Token: $JWT"
-
-# AMENITIES CREATION
-echo -e "\n> Create New Amenities:"
-RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/amenities/ -H "Content-Type: application/json" -H "Authorization: Bearer $JWT" -d '{"name": "Parking"}')
-export AMENITY_1="$(echo "$RESPONSE" | jq -r '.id')"
-echo "Amenity ID: $AMENITY_1"
-RESPONSE=$(curl -s -X POST http://localhost:5000/api/v1/amenities/ -H "Content-Type: application/json" -H "Authorization: Bearer $JWT" -d '{"name": "Wi-Fi"}')
-export AMENITY_2="$(echo "$RESPONSE" | jq -r '.id')"
-echo "Amenity ID: $AMENITY_2"
 
 # PLACE CREATION
 echo -e "\n> Create New Place:"
