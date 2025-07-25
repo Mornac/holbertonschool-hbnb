@@ -12,9 +12,11 @@
   <header>
     <img src="images/logo.png" class="logo" alt="Logo">
     <nav>
-      <a href="index.html" id="index-link"> Index </a>
-      <a href="login.html" id="login-button"> Login </a>
-      <button id="logout-button" class="logout-button" style="display: none;"> Logout </button>
+      <a href="index.html" id="index-link"> Home  </a>
+      <div id="auth-status">
+        <a href="login.html" id="login-button"> Login </a>
+        <button id="logout-button" class="logout-button" style="display: none;"> Logout </button>
+      </div>
     </nav>
   </header>
 
@@ -22,42 +24,62 @@
     <section>
       <h1> Available Places </h1>
     </section>
+
+<br>
+<!-- Places Options -->
     <section id="filter">
-      <label for="price-filter"> Max Price: </label>
-      <select id="price-filter">
-        <option value="10"> $10 </option>
-        <option value="20"> $20 </option>
-        <option value="50"> $50 </option>
-        <option value="100"> $100 </option>
-        <option value="All"> All prices </option>
-      </select>
-      <label for="capacity-filter"> Number of persons: </label>
+      <label for="price-filter">
+        <h2> Max Price: </h2>
+      </label>
+        <select id="price-filter">
+          <option value="10"> €10 </option>
+          <option value="50"> €50 </option>
+          <option value="100"> €100 </option>
+          <option value="All"> € All prices </option>
+        </select>
+      <label for="capacity-filter">
+        <h2> Number of persons: </h2>
+      </label>
       <input type="number" id="capacity-filter" min="1" value="1">
-      <label for="rooms-filter"> Number of rooms: </label>
+      <label for="rooms-filter">
+        <h2> Number of rooms: </h2>
+      </label>
       <input type="number" id="rooms-filter" min="1" value="1">
-      <label for="surface-filter"> Surface in m²: </label>
+      <label for="surface-filter">
+        <h2> Surface in m²: </h2>
+      </label>
       <input type="number" id="surface-filter" min="5" value="5">
     </section>
-    <section id="places-list">
 
-      <div class="place-card" data-id="1" data-price="10">
-        <h3> Beautiful Beach House </h3>
-        <p> Description of the place. </p>
-        <p> Price per night: $150 </p>
-        <button class="details-button"> View Details </button>
-      </div>
-       <div class="place-card" data-id="1" data-price="10">
-        <h3> Cozy Cabin </h3>
-        <p> Description of the place. </p>
-        <p> Price per night: $100 </p>
-        <button class="details-button"> View Details </button>
-      </div>
-            <div class="place-card" data-id="1" data-price="10">
-        <h3> Modern Apartment </h3>
-        <p> Description of the place. </p>
-        <p> Price per night: $200 </p>
-        <button class="details-button"> View Details </button>
-      </div>     
+<br>
+<!-- Places List -->
+    <section id="places-list">
+      <div class="row">
+        <div class="column">
+          <div class="place-card" data-id="1" data-price="10">
+            <h3> Beautiful Beach House </h3>
+            <p> Description of the place. </p>
+            <p> Price per night: $150 </p>
+            <button class="details-button"> View Details </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="place-card" data-id="1" data-price="10">
+            <h3> Cozy Cabin </h3>
+            <p> Description of the place. </p>
+            <p> Price per night: $100 </p>
+            <button class="details-button"> View Details </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="place-card" data-id="1" data-price="10">
+            <h3> Modern Apartment </h3>
+            <p> Description of the place. </p>
+            <p> Price per night: $200 </p>
+            <button class="details-button"> View Details </button>
+          </div>
+        </div>
+      </div>   
     </section>
   </main>
 
