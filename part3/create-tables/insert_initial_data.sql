@@ -1,4 +1,4 @@
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `is_admin`) 
+INSERT INTO users (id, first_name, last_name, email, password, is_admin) 
 VALUES (
     '36c9050e-ddd3-4c3b-9731-9f487208bbc1',
     'Admin',
@@ -8,7 +8,7 @@ VALUES (
     1
 );
 
-INSERT INTO `amenities` (`id`, `name`) 
+INSERT INTO amenities (id, name) 
 VALUES
     ('4104a0cc-3128-4639-8cbf-ebe56a32b84a', 'Wifi'),
     ('910da42e-cf77-44d6-8383-18bcb192961c', 'Swimming Pool'),

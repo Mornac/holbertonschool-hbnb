@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Review</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header>
+    <img src="images/logo.png" class="logo" alt="Logo">
+    <nav>
+      <a href="index.html" id="index-link"> Index </a>
+      <a href="login.html" id="login-button"> Login </a>
+      <button id="logout-button" class="logout-button" style="display: none;"> Logout </button>
+  </nav>
+  </header>
+
+  <main>
+    <section id="add-review-form">
+      <h2> Add a Review </h2>
+    <form id="review-form">
+      <div class="form-group">
+        <label for="place_id"> Place ID: </label>
+        <input type="text" id="place_id" name="place_id" required>
+      </div>
+      <div class="form-group">
+        <label for="review"> Your Review: </label>
+        <textarea id="review" name="review" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="rating"> Rating: </label>
+        <select id="rating" name="rating" required>
+          <option value="1"> ★☆☆☆☆ </option>
+          <option value="2"> ★★☆☆☆ </option>
+          <option value="3"> ★★★☆☆ </option>
+          <option value="4"> ★★★★☆ </option>
+          <option value="5"> ★★★★★ </option>
+        </select>
+      </div>
+      <button type="submit">Submit Review</button>
+    </form>
+  </main>
+
+  <footer>
+    <p> &copy; 2025 HBnB Evolution. All rights reserved. </p>
+  </footer>
+
+  <script src="scripts.js"></script>
+
+</body>
+
+</html>
