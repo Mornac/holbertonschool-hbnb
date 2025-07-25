@@ -19,6 +19,9 @@
   </header>
 
   <main>
+    <section>
+      <h1> Available Places </h1>
+    </section>
     <section id="filter">
       <label for="price-filter"> Max Price: </label>
       <select id="price-filter">
@@ -28,15 +31,33 @@
         <option value="100"> $100 </option>
         <option value="All"> All prices </option>
       </select>
+      <label for="capacity-filter"> Number of persons: </label>
+      <input type="number" id="capacity-filter" min="1" value="1">
+      <label for="rooms-filter"> Number of rooms: </label>
+      <input type="number" id="rooms-filter" min="1" value="1">
+      <label for="surface-filter"> Surface in m²: </label>
+      <input type="number" id="surface-filter" min="5" value="5">
     </section>
     <section id="places-list">
 
       <div class="place-card" data-id="1" data-price="10">
-        <h3> Place 1 </h3>
+        <h3> Beautiful Beach House </h3>
         <p> Description of the place. </p>
-        <p> Price: $10 </p>
+        <p> Price per night: $150 </p>
         <button class="details-button"> View Details </button>
       </div>
+       <div class="place-card" data-id="1" data-price="10">
+        <h3> Cozy Cabin </h3>
+        <p> Description of the place. </p>
+        <p> Price per night: $100 </p>
+        <button class="details-button"> View Details </button>
+      </div>
+            <div class="place-card" data-id="1" data-price="10">
+        <h3> Modern Apartment </h3>
+        <p> Description of the place. </p>
+        <p> Price per night: $200 </p>
+        <button class="details-button"> View Details </button>
+      </div>     
     </section>
   </main>
 

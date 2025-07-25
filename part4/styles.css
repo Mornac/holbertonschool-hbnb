@@ -172,11 +172,19 @@ nav a {
     margin-left: 1rem;
 }
 
-h2 {
+h1 {
     color: var(--dark-color);
     font-size: 2rem;
     font-weight: bold;
     font-size: large;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    color: var(--dark-color);
+    font-size: 2rem;
+    font-weight: bold;
+    font-size: medium;
     margin-bottom: 1rem;
 }
 
@@ -191,8 +199,14 @@ footer {
     margin-top: auto;
 }
 
+.place-list {
+    width: flex;
+    background-color: var(--light-color);
+    border: 1px solid #ddd;
+}
 .place-card {
     background-color: var(--light-color);
+    width: 33%;
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 10px;
@@ -223,7 +237,7 @@ label {
     margin-bottom: 5px;
     font-weight: bold;
     color: var(--dark-color);
-    display: block;
+    display: flex;
 }
 
 input, textarea, select {
@@ -232,6 +246,7 @@ input, textarea, select {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    display: flex;
 }
 
 button {
@@ -248,4 +263,13 @@ button {
 button:hover {
     background-color: #090f14;
     transition: background-color 0.3s ease;
+}
+
+#filter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
 }
