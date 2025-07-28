@@ -108,6 +108,7 @@ class PlaceList(Resource):
                 'rooms': place.rooms,
                 'capacity': place.capacity,
                 'surface': place.surface,
+                'amenities' : [amenity.name for amenity in place.amenities]
             })
         return places, 200
 
@@ -128,6 +129,18 @@ class PlaceResource(Resource):
             "name": amenity.name
         } for amenity in place.amenities]
 
+        reviews = [{
+            "id":  review.id,
+            "title": review.title,
+            "text": review.text,
+            "rating": review.rating,
+            "user":{
+                "id": facade.get_user(review.user_id).id,
+                "first_name": facade.get_user(review.user_id).first_name,
+                "last_name": facade.get_user(review.user_id).last_name,
+            }
+        } for review in place.reviews]
+
         if not place:
             return {'error': 'Place not found'}, 404
         return {
@@ -146,7 +159,8 @@ class PlaceResource(Resource):
             'rooms': place.rooms,
             'capacity': place.capacity,
             'surface': place.surface,
-            'amenities': amenities
+            'amenities': amenities,
+            'reviews': reviews
         }, 200
 
     @api.expect(place_model)
@@ -195,10 +209,15 @@ class PlaceReviewList(Resource):
 
         reviews = []
         for review in review_list:
+            user = facade.get_user(review.user_id)
             reviews.append({
                 'id': review.id,
                 'title': review.title,
                 'text': review.text,
-                'rating': review.rating
+                'rating': review.rating,
+                'user': {
+                    'first_name': user.first_name,
+                    'last_name': user.last_name
+                }
             })
         return reviews, 200

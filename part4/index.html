@@ -1,94 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> List of Places </title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Places</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-  <header>
-    <img src="images/logo.png" class="logo" alt="Logo">
-    <nav>
-      <a href="index.html" id="index-link"> Home  </a>
-      <div id="auth-status">
-        <a href="login.html" id="login-button"> Login </a>
-        <button id="logout-button" class="logout-button" style="display: none;"> Logout </button>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-      <h1> Available Places </h1>
-    </section>
-
-<br>
-<!-- Places Options -->
-    <section id="filter">
-      <label for="price-filter">
-        <h2> Max Price: </h2>
-      </label>
-        <select id="price-filter">
-          <option value="10"> €10 </option>
-          <option value="50"> €50 </option>
-          <option value="100"> €100 </option>
-          <option value="All"> € All prices </option>
-        </select>
-      <label for="capacity-filter">
-        <h2> Number of persons: </h2>
-      </label>
-      <input type="number" id="capacity-filter" min="1" value="1">
-      <label for="rooms-filter">
-        <h2> Number of rooms: </h2>
-      </label>
-      <input type="number" id="rooms-filter" min="1" value="1">
-      <label for="surface-filter">
-        <h2> Surface in m²: </h2>
-      </label>
-      <input type="number" id="surface-filter" min="5" value="5">
-    </section>
-
-<br>
-<!-- Places List -->
-    <section id="places-list">
-      <div class="row">
-        <div class="column">
-          <div class="place-card" data-id="1" data-price="10">
-            <h3> Beautiful Beach House </h3>
-            <p> Description of the place. </p>
-            <p> Price per night: $150 </p>
-            <button class="details-button"> View Details </button>
-          </div>
+    <header>
+        <div class="header-container">
+            <img src="images/logo.png" alt="Logo" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="login.html" id="login-link" class="login-button">login</a>
+            </nav>
         </div>
-        <div class="column">
-          <div class="place-card" data-id="1" data-price="10">
-            <h3> Cozy Cabin </h3>
-            <p> Description of the place. </p>
-            <p> Price per night: $100 </p>
-            <button class="details-button"> View Details </button>
-          </div>
-        </div>
-        <div class="column">
-          <div class="place-card" data-id="1" data-price="10">
-            <h3> Modern Apartment </h3>
-            <p> Description of the place. </p>
-            <p> Price per night: $200 </p>
-            <button class="details-button"> View Details </button>
-          </div>
-        </div>
-      </div>   
-    </section>
-  </main>
+    </header>
 
-  <footer>
-    <p> &copy; 2025 HBnB Evolution. All rights reserved. </p>
-  </footer>
+    <main>
+        <div class="container">
+            <h1>Available places</h1>
+            
+            <div class="filter-section">
+                <label for="price-filter">Max Price :</label>
+                <select id="price-filter">
+                    <option value="all">All</option>
+                    <option value="50">50€</option>
+                    <option value="100">100€</option>
+                    <option value="150">150€</option>
+                </select>
+            </div>
 
-  <script src="scripts.js"></script>
-  
+            <div id="places-list" class="places-container">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 HBnB. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
 </body>
-
 </html>

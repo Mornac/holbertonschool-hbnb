@@ -1,55 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Review</title>
+    <title>Add a review</title>
+    <link rel="icon" type="image/png" href="icon.png">
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-  <header>
-    <img src="images/logo.png" class="logo" alt="Logo">
-    <nav>
-      <a href="index.html" id="index-link"> Index </a>
-      <a href="login.html" id="login-button"> Login </a>
-      <button id="logout-button" class="logout-button" style="display: none;"> Logout </button>
-  </nav>
-  </header>
+    <header>
+        <div class="header-container">
+            <img src="images/logo.png" alt="Logo" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="login.html" id="login-link" class="login-button">Login</a>
+            </nav>
+        </div>
+    </header>
 
-  <main>
-    <section id="add-review-form">
-      <h2> Add a Review </h2>
-    <form id="review-form">
-      <div class="form-group">
-        <label for="place_id"> Place ID: </label>
-        <input type="text" id="place_id" name="place_id" required>
-      </div>
-      <div class="form-group">
-        <label for="review"> Your Review: </label>
-        <textarea id="review" name="review" required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="rating"> Rating: </label>
-        <select id="rating" name="rating" required>
-          <option value="1"> ★☆☆☆☆ </option>
-          <option value="2"> ★★☆☆☆ </option>
-          <option value="3"> ★★★☆☆ </option>
-          <option value="4"> ★★★★☆ </option>
-          <option value="5"> ★★★★★ </option>
-        </select>
-      </div>
-      <button type="submit">Submit Review</button>
-    </form>
-  </main>
+    <main>
+        <div class="container">
+            <div class="add-review-container">
+                <h1>Add a review</h1>
+                
+                <form id="review-form" class="form">
+                    <div class="form-group">
+                        <label for="review-text">Your review :</label>
+                        <textarea id="review-text" name="review-text" rows="6" required 
+                                  placeholder="Partagez votre expérience..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rating">Rating :</label>
+                        <select id="rating" name="rating" required>
+                            <option value="">Choose a note</option>
+                            <option value="1">1 star - Very bad</option>
+                            <option value="2">2 stars - Bad</option>
+                            <option value="3">3 stars - Correct</option>
+                            <option value="4">4 stars - Good</option>
+                            <option value="5">5 stars - Perfect</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" onclick="history.back()" class="cancel-button">Cancel</button>
+                        <button type="submit" class="submit-button">Post the review</button>
+                    </div>
+                </form>
+                
+                <div id="success-message" class="success-message" style="display: none;"></div>
+                <div id="error-message" class="error-message" style="display: none;"></div>
+            </div>
+        </div>
+    </main>
 
-  <footer>
-    <p> &copy; 2025 HBnB Evolution. All rights reserved. </p>
-  </footer>
+    <footer>
+        <p>&copy; 2025 HBnB. All rights reserved.</p>
+    </footer>
 
-  <script src="scripts.js"></script>
-
+    <script src="scripts.js"></script>
 </body>
-
 </html>
