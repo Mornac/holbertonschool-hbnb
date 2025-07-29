@@ -94,9 +94,10 @@ function checkAuthentication() {
   
   // Redirect if not authenticated only for pages that require it
   const isLoginPage = window.location.pathname.includes('login.html');
-  const isIndexPage = window.location.pathname.includes('index.html') || 
-                     window.location.pathname === '/' || 
-                     window.location.pathname.endsWith('/');
+  const isIndexPage = 
+    window.location.pathname.includes('index.html') || 
+    window.location.pathname === '/' || 
+    window.location.pathname.endsWith('/');
   
   // Allow access to index and login without token
   if (!token && !isLoginPage && !isIndexPage) {
@@ -418,14 +419,14 @@ function showPublicMessage() {
   }
 }
 
-// === ROUTING COMPATIBLE WITH YOUR ORIGINAL CODE ===
+// === ROUTING ===
 document.addEventListener('DOMContentLoaded', () => {
   const currentPage = window.location.pathname.split('/').pop();
   
   // Check authentication
   const authToken = checkAuthentication();
   
-  // Page routing - compatible with your original logic
+  // Page routing
   switch (currentPage) {
     case 'login.html':
       handleLoginPage();
@@ -687,7 +688,7 @@ function logoutUser() {
   window.location.href = 'login.html';
 }
 
-// Legacy logout function compatible with your original code
+// Legacy logout function
 function logout() {
   logoutUser();
 }
@@ -795,20 +796,13 @@ async function fetchPlaces(maxPrice = null, token = null) {
       const data = await response.json();
       const places = data.places || data;
       
-      // Process amenities for each place and map your fields
+      // Process amenities for each place and map fields
       return places.map(place => ({
         ...place,
-        // Mapping your fields to expected fields
+        // Mapping fields to expected fields
         title: place.name || place.title_of_the_place || place.title,
         description: place.description_of_the_place || place.description,
         price: place.price_per_night || place.price,
-        city: place.city || 'Unknown city',
-        country: place.country || 'Unknown country',
-        // Keep your original fields
-        name: place.name,
-        title_of_the_place: place.title_of_the_place,
-        description_of_the_place: place.description_of_the_place,
-        price_per_night: place.price_per_night,
         latitude: place.latitude,
         longitude: place.longitude,
         owner_id: place.owner_id,
@@ -872,7 +866,7 @@ function formatAmenitiesDisplay(amenities) {
   }).join(' ');
 }
 
-// === PLACES DISPLAY (Compatible with your structure) ===
+// === PLACES DISPLAY ===
 function displayPlaces(places) {
   const placesContainer = document.getElementById('places-list');
   if (!placesContainer) {
@@ -1256,4 +1250,3 @@ async function submitReview(token, placeId, reviewText, rating) {
     }
   } catch (error) {}
 }
-
