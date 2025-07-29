@@ -1131,7 +1131,7 @@ function displayPlaceDetails(place) {
     
     <div class="place-main-info">
       <div class="place-image-main">
-        <img src="placeholder-image.jpg" alt="${place.name}" onerror="this.src='https://via.placeholder.com/600x400?text=Image+not+available'">
+        <img src="placeholder-image.jpg" alt="" onerror="this.src='https://via.placeholder.com/600x400?text=Image+not+available'">
       </div>
       
       <div class="place-info">
