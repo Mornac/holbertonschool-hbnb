@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List of Places</title>
-    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -23,22 +23,27 @@
             <h1>Available places</h1>
             
             <div class="filter-section">
-                <label for="price-filter">Max Price :</label>
-                <select id="price-filter">
-                    <option value="all">All</option>
-                    <option value="50">50€</option>
-                    <option value="100">100€</option>
-                    <option value="150">150€</option>
-                </select>
+                <div class="filter-group">
+                    <label for="price-filter">Max Price:</label>
+                    <select id="price-filter">
+                        <option value="all">All</option>
+                        <option value="50">50€</option>
+                        <option value="100">100€</option>
+                        <option value="150">150€</option>
+                    </select>
+                </div>
+
+                <div id="results-count" class="results-count"></div>
             </div>
 
             <div id="places-list" class="places-container">
+                <div class="loading">Loading places...</div>
             </div>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2025 HBnB. All rights reserved.</p>
+        <p>&copy; 2025 HBnB - I.Mornac. All rights reserved.</p>
     </footer>
 
     <script src="scripts.js"></script>
