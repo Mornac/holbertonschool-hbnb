@@ -88,15 +88,16 @@ part4/
 ```
 
 ### **Screenshots**
-Holberton purpose Index
+Holberton purpose Index  
 ![proposition_index](https://github.com/Mornac/holbertonschool-hbnb/blob/main/part4/doc_images/img_index.png?raw=true)  
 
-Holberton purpose Place
+Holberton purpose Place  
 ![proposition_place](https://github.com/Mornac/holbertonschool-hbnb/blob/main/part4/doc_images/img_place.png?raw=true)  
 
-Holberton purpose Place add review
+Holberton purpose Place add review  
 ![proposition_place_review](https://github.com/Mornac/holbertonschool-hbnb/blob/main/part4/doc_images/img_place_review.png?raw=true)  
-Model Page Add review  
+
+MHolberton purpose Review and Rating   
 ![proposition_review](https://github.com/Mornac/holbertonschool-hbnb/blob/main/part4/doc_images/img_review.png?raw=true)  
 
 
