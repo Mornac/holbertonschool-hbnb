@@ -32,7 +32,7 @@ def create_app(config_class="config.DevelopmentConfig"):
     api_rest = Api(app, version='1.0', title='HBnB API', description='HBnB Application API', doc='/api/v1/')
 
     api_rest.add_namespace(users_ns, path='/api/v1/users')
-    api_rest.add_namespace(amenities_ns, path='/api/v1/places')
+    api_rest.add_namespace(amenities_ns, path='/api/v1/amenities')
     api_rest.add_namespace(places_ns, path='/api/v1/places')
     api_rest.add_namespace(reviews_ns, path='/api/v1/reviews')
     api_rest.add_namespace(auth_ns, path='/api/v1/auth')
