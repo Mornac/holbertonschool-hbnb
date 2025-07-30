@@ -21,7 +21,6 @@ body {
     flex: 1;
 }
 
-/* Header */
 header {
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -64,16 +63,15 @@ nav a:hover {
 }
 
 .login-button {
-    background-color: #721c24 !important;
-    color: white !important;
+    background-color: #721c24;
+    color: white;
 }
 
 .login-button:hover {
-    background-color: #8b2332 !important;
-    color: white !important;
+    background-color: #8b2332;
+    color: white;
 }
 
-/* Footer */
 footer {
     background-color: #333;
     color: white;
@@ -82,7 +80,6 @@ footer {
     margin-top: auto;
 }
 
-/* Messages (JavaScript généré) */
 .message {
     position: fixed;
     top: 20px;
@@ -98,7 +95,7 @@ footer {
 }
 
 .success-message {
-    background-color: #28a745;
+    background-color: #2898a7;
 }
 
 .error-message {
@@ -116,7 +113,6 @@ footer {
     }
 }
 
-/* Messages statiques dans le HTML */
 .success-message:not(.message),
 .error-message:not(.message) {
     position: static;
@@ -128,13 +124,13 @@ footer {
 
 .success-message:not(.message) {
     background-color: #d4edda;
-    color: #155724;
+    color: #2898a7;
     border: 1px solid #c3e6cb;
 }
 
 .error-message:not(.message) {
     background-color: #f8d7da;
-    color: #721c24;
+    color: #dc3545;
     border: 1px solid #f5c6cb;
 }
 
@@ -274,7 +270,6 @@ footer {
     text-decoration: underline;
 }
 
-/* Page d'accueil - Liste des lieux */
 .filter-section {
     margin-bottom: 2rem;
     background-color: white;
@@ -314,7 +309,6 @@ footer {
     font-style: italic;
 }
 
-/* Message public pour les utilisateurs non connectés */
 .public-message {
     text-align: center;
     padding: 4rem 2rem;
@@ -570,7 +564,6 @@ footer {
     display: inline-block;
 }
 
-/* Section des avis */
 .reviews-section {
     background-color: white;
     border-radius: 10px;
@@ -634,7 +627,6 @@ footer {
     font-style: italic;
 }
 
-/* Section d'ajout d'avis */
 .add-review {
     background-color: white;
     border-radius: 10px;
@@ -671,7 +663,6 @@ footer {
     font-size: 1.1rem;
 }
 
-/* Breadcrumb */
 .breadcrumb {
     margin-bottom: 2rem;
     font-size: 0.9rem;
@@ -700,7 +691,6 @@ footer {
     cursor: pointer;
 }
 
-/* Guidelines */
 .review-guidelines {
     margin-top: 2rem;
     padding: 1.5rem;
@@ -735,7 +725,6 @@ footer {
     left: 0;
 }
 
-/* Boutons liens */
 .btn-link {
     display: inline-block;
     color: #721c24;
@@ -752,7 +741,6 @@ footer {
     color: white;
 }
 
-/* États de chargement */
 .loading {
     text-align: center;
     padding: 3rem;
@@ -777,7 +765,6 @@ footer {
     100% { transform: rotate(360deg); }
 }
 
-/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -797,7 +784,6 @@ footer {
     animation: fadeIn 0.6s ease-out;
 }
 
-/* Styles responsive */
 @media (max-width: 992px) {
     .place-main-info {
         grid-template-columns: 1fr;
