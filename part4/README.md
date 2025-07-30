@@ -106,4 +106,4 @@ This part of the project was carried out by:
 
 > Thanks  
 > [Gwendal Minguy-Pèlerin](https://github.com/gwendalminguy/) my co-author of the previous parts of this project for his expertise and professionalism.  
-We worked a lot, in a positive spirit, with respect! 
+We worked a lot, but it was in a positive spirit, with respect and fun! 
