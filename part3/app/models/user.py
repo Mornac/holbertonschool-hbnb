@@ -7,7 +7,7 @@ from app import db, bcrypt
 regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
 
 
-class User(BaseModel):
+class User(BaseModel, db.Model):
     __tablename__ = 'users'
 
     first_name = db.Column(db.String(50), nullable=False)
@@ -45,21 +45,3 @@ class User(BaseModel):
             return email
         else:
             raise ValueError
-
-    """
-    def __init__(self, first_name, last_name, email, password, is_admin=False):
-        super().__init__()
-        if len(first_name) <= 50:
-            self.__first_name = first_name
-        else:
-            raise ValueError
-        if len(last_name) <= 50:
-            self.__last_name = last_name
-        else:
-            raise ValueError
-        if re.match(regex, email):
-            self.__email = email
-        else:
-            raise ValueError
-        self.is_admin = is_admin
-    """
