@@ -4,34 +4,36 @@ This fourth part of the HBnB Project focuses on the front-end development of our
 My task is to design an implement an interactive user interface that connect with the back-end services developed in previous parts of HBnB project.  
 
 ### 📂 **Summary**
-* [Technologies used](#technologies_used)  
+* [Technologies used](#technologies-used)
 * [Objectives](#objectives)   
-* [Learning Objectives](#learning_objectives)  
-* [Recommended Resources](#recommended_resources)  
+* [Learning objectives](#learning-objectives)  
+* [Recommended Resources](#recommended-resources)  
 * [Tasks](#tasks)  
+* [Directory Structure](#directory-structure)
 * [Screenshots](#screenshots)
 * [Author](#author)
+
  -----
 
 
-### 🔧 **Technologies used** 
+### **Technologies used**
 <p align=center>
     <img src="doc_images/download.png" width="25%">
 </p>  
 
-### **Objectives**  
+### **Objectives**
 1. Develop a user-friendly interface following provided design specifications.  
 2. Implement client-side functionality to interact with the back-end API.  
 3. Ensure secure and efficient data handling using JavaScript.  
 4. Apply modern web development practices to create a dynamic web application.  
 
-### **Learning Objectives**  
+### **Learning objectives**
 1. Understand and apply HTML5, CSS3, and JavaScript ES6 in a real-world project.
 2. Learn to interact with back-end services using AJAX/Fetch API.
 3. Implement authentication mechanisms and manage user sessions.
 4. Use client-side scripting to enhance user experience without page reloads.  
 
-### **Recommended Resources**  
+### **Recommended Resources**
 [HTML5 Documentation](https://developer.mozilla.org/en-US/docs/Glossary/HTML5)  
 [CSS Documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/Tutorials)  
 [JavaScript Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript)  
@@ -40,7 +42,7 @@ My task is to design an implement an interactive user interface that connect wit
 [Handling Cookies in JavaScript](https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie)  
 [Client-Side Form Validation](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation)  
 
-### **Tasks**  
+### **Tasks**
 #### 0. Design  
 - Complete provided HTML and CSS files to match the given design specifications.  
 - Create pages for Login, List of Places, Place Details, and Add Review.  
@@ -63,7 +65,7 @@ My task is to design an implement an interactive user interface that connect wit
 - Implement the form to add a review for a place.  
 - Ensure the form is accessible only to authenticated users, redirecting others to the index page.  
 
-### **Directory Structure:**
+### **Directory Structure**
 ```python
 part4/
 ├── doc_images/
@@ -94,11 +96,11 @@ Holberton purpose Place
 
 Holberton purpose Place add review
 ![proposition_place_review](https://github.com/Mornac/holbertonschool-hbnb/blob/main/part4/doc_images/img_place_review.png?raw=true)  
-Model Page Add review
+Model Page Add review  
 ![proposition_review](https://github.com/Mornac/holbertonschool-hbnb/blob/main/part4/doc_images/img_review.png?raw=true)  
 
 
-## 🧑‍🤝‍🧑 **Author**  
+### **Author**
 This part of the project was carried out by:  
 [Ingrid Mornac](https://github.com/Mornac/)  
 
