@@ -760,6 +760,15 @@ footer {
     margin-left: 10px;
 }
 
+.amenitiesList {
+    background-color: #f8f9fa;
+    border-radius: 8px;   
+}
+.amenitiesList ul {
+    list-style-type: disc;
+    margin-left: 50px;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

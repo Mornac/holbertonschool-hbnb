@@ -1,5 +1,5 @@
 // === CONFIGURATION ===
-const API_BASE_URL = 'http://localhost:5000/api/v1';
+const API_BASE_URL = 'http://127.0.0.1:5000/api/v1';
 let token = null;
 let allPlaces = [];
 
@@ -25,7 +25,7 @@ const deleteCookie = (name) => {
 const showMessage = (message, type = 'error') => {
   const existingMsg = document.querySelector('.message');
   if (existingMsg) existingMsg.remove();
-  
+
   const div = document.createElement('div');
   div.className = `message ${type}-message`;
   div.textContent = message;
@@ -34,21 +34,23 @@ const showMessage = (message, type = 'error') => {
     padding: 15px; border-radius: 5px; color: white;
     background: ${type === 'success' ? '#4CAF50' : '#f44336'};
   `;
-  
+
   document.body.appendChild(div);
   setTimeout(() => div.remove(), 3000);
 };
 
 const apiRequest = async (endpoint, options = {}) => {
   const config = {
+    method: "GET",
     headers: { 'Content-Type': 'application/json' },
-    ...options
+    //body: JSON.stringify({ "email" : "admin@hbnb.io", "password": "admin1234" }),
+    //options
   };
-  
+
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
-  
+
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -65,7 +67,7 @@ const getUrlParam = (param) => new URLSearchParams(window.location.search).get(p
 const checkAuth = () => {
   token = getCookie('token') || localStorage.getItem('token');
   const loginLink = document.getElementById('login-link');
-  
+
   if (loginLink) {
     if (token) {
       loginLink.textContent = 'Logout';
@@ -75,7 +77,7 @@ const checkAuth = () => {
       loginLink.onclick = () => window.location.href = 'login.html';
     }
   }
-  
+
   return token;
 };
 
@@ -85,20 +87,35 @@ const login = async (email, password) => {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Logging in...';
   }
-  
+
   try {
-    const data = await apiRequest('/auth/login', {
+    /*const data = await apiRequest('/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password })
+    });*/
+
+
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
     });
-    
-    token = data.access_token;
-    setCookie('token', token);
-    localStorage.setItem('token', token);
-    
+    if (response.ok) {
+      const data = await response.json();
+      token = data.access_token;
+      setCookie('token', token);
+      window.location.href = 'index.html';
+    } else {
+      alert('Login failed: ' + response.statusText);
+    }
+
+    //localStorage.setItem('token', token);
+
     showMessage('Login successful!', 'success');
-    setTimeout(() => window.location.href = 'index.html', 1500);
-    
+    //setTimeout(() => window.location.href = 'index.html', 1500);
+
   } catch (error) {
     showMessage('Login failed. Check your credentials.');
   } finally {
@@ -119,8 +136,18 @@ const logout = () => {
 // === PLACES ===
 const fetchPlaces = async () => {
   try {
-    const data = await apiRequest('/places');
-    return data.places || data;
+    const response = await fetch(`${API_BASE_URL}/places/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return data
+    } else {
+      alert('Login failed: ' + response.statusText);
+    }
   } catch (error) {
     if (!token) {
       throw new Error('AUTHENTICATION_REQUIRED');
@@ -133,10 +160,10 @@ const fetchPlaces = async () => {
 const displayPlaces = (places) => {
   const container = document.getElementById('places-list');
   if (!container) return;
-  
+
   if (!places || places.length === 0) {
-    container.innerHTML = token ? 
-      '<p>No places available.</p>' : 
+    container.innerHTML = token ?
+      '<p>No places available.</p>' :
       `<div class="public-message">
         <h2>Welcome to HBnB</h2>
         <p>Discover unique accommodations around the world.</p>
@@ -148,7 +175,7 @@ const displayPlaces = (places) => {
   container.innerHTML = places.map(place => `
     <div class="place-card" data-price="${place.price_per_night || place.price}">
       <div class="place-info">
-        <h3>${place.name}</h3>
+        <h3>${place.title}</h3>
         <p class="place-description">${place.description_of_the_place || place.description || ''}</p>
         <p class="place-price">${place.price_per_night || place.price}€ / night</p>
         <div class="place-details-grid">
@@ -167,7 +194,7 @@ const displayPlaces = (places) => {
 const filterPlaces = () => {
   const filterValue = document.getElementById('price-filter')?.value;
   if (!filterValue) return;
-  
+
   const cards = document.querySelectorAll('.place-card');
   cards.forEach(card => {
     const price = parseFloat(card.dataset.price);
@@ -178,10 +205,22 @@ const filterPlaces = () => {
 // === PLACE DETAILS ===
 const fetchPlaceDetails = async (placeId) => {
   try {
-    const place = await apiRequest(`/places/${placeId}`);
-    displayPlaceDetails(place);
-    await fetchReviews(placeId);
+    const response = await fetch(`${API_BASE_URL}/places/${placeId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      displayPlaceDetails(data);
+      await fetchReviews(placeId);
+    } else {
+      alert('Login failed: ' + response.statusText);
+    }
+    
   } catch (error) {
+    console.log(error)
     document.getElementById('place-details').innerHTML = '<p>Error loading place details.</p>';
   }
 };
@@ -189,11 +228,15 @@ const fetchPlaceDetails = async (placeId) => {
 const displayPlaceDetails = (place) => {
   const container = document.getElementById('place-details');
   if (!container) return;
-
+  let amenitiesList = `<ul>`;
+  place.amenities.forEach(amenity => {
+    amenitiesList += `<li>${amenity.name}</li>`
+  });
+  amenitiesList += `</ul>`;
   container.innerHTML = `
     <div class="place-header">
-      <h1>${place.name}</h1>
-      <div class="place-location">${place.city || 'Unknown city'}</div>
+      <h1>${place.title}</h1>
+      <button class="place-location"><a href="http://maps.google.com/?ll=${place.latitude},${place.longitude}">Location</a></button>
     </div>
     
     <div class="place-main-info">
@@ -204,7 +247,7 @@ const displayPlaceDetails = (place) => {
         </div>
         
         <div class="host-info">
-          <h3>Hosted by ${place.host?.first_name || place.owner || 'Unknown'} ${place.host?.last_name || ''}</h3>
+          <h3>Hosted by ${place.owner.first_name}</h3>
         </div>
         
         <div class="place-description">
@@ -227,20 +270,10 @@ const displayPlaceDetails = (place) => {
               <span class="feature-icon">📐</span>
               <span class="feature-label">Surface: ${place.surface}m²</span>
             </div>
+            <div class="amenitiesList">${amenitiesList}</div>
           </div>
         </div>
-        
-        ${place.amenities ? `
-          <div class="amenities">
-            <h3>Amenities</h3>
-            <div class="amenities-grid">
-              ${place.amenities.split(',').map(amenity => 
-                `<span class="amenity-tag">• ${amenity.trim()}</span>`
-              ).join('')}
-            </div>
-          </div>
-        ` : ''}
-      </div>
+       </div>
     </div>
   `;
 };
@@ -257,13 +290,13 @@ const fetchReviews = async (placeId) => {
 
 const displayReviews = (reviews) => {
   const container = document.getElementById('reviews-list');
-  if (!container) return;
-
-  if (!reviews || reviews.length === 0) {
-    container.innerHTML = '<p>No reviews yet.</p>';
-    return;
-  }
-
+    if (!container) return;
+    if (!reviews || reviews.length === 0) {
+      container.innerHTML = '<p>No reviews yet.</p>';
+      console.log(123456)
+      return;
+    }
+ 
   const generateStars = (rating) => {
     if (!rating) return '☆☆☆☆☆';
     return '★'.repeat(Math.floor(rating)) + '☆'.repeat(5 - Math.floor(rating));
@@ -302,7 +335,7 @@ const submitReview = async (placeId, reviewText, rating) => {
         rating: parseInt(rating)
       })
     });
-    
+
     showMessage('Review submitted successfully!', 'success');
     return { success: true };
   } catch (error) {
@@ -315,31 +348,30 @@ const submitReview = async (placeId, reviewText, rating) => {
 const initPage = async () => {
   checkAuth();
   const currentPage = window.location.pathname.split('/').pop();
-  
   switch (currentPage) {
     case 'login.html':
       if (token) {
         window.location.href = 'index.html';
         return;
       }
-      
+
       const loginForm = document.getElementById('login-form');
       if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
           e.preventDefault();
           const email = document.getElementById('email').value.trim();
           const password = document.getElementById('password').value.trim();
-          
+
           if (!email || !password) {
             showMessage('Please enter email and password');
             return;
           }
-          
+
           await login(email, password);
         });
       }
       break;
-      
+
     case 'index.html':
     case '':
       try {
@@ -351,79 +383,83 @@ const initPage = async () => {
           displayPlaces([]);
         }
       }
-      
+
       const priceFilter = document.getElementById('price-filter');
       if (priceFilter) {
         priceFilter.addEventListener('change', filterPlaces);
       }
       break;
-      
+
     case 'place.html':
+      const reviewLink = document.querySelector('.btn-link');
       const placeId = getUrlParam('id');
+      reviewLink.setAttribute('href', `add_review.html?id=${placeId}`);
       if (!placeId) {
         window.location.href = 'index.html';
         return;
       }
-      
+
       await fetchPlaceDetails(placeId);
-      
+
       const addReviewSection = document.getElementById('add-review');
       if (addReviewSection && token) {
         addReviewSection.style.display = 'block';
-        
+
         const reviewForm = document.getElementById('review-form');
         if (reviewForm) {
           reviewForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const reviewText = document.getElementById('review-text').value.trim();
             const rating = document.getElementById('rating').value;
-            
+
             if (!reviewText) {
               showMessage('Please enter a review');
               return;
             }
-            
+
             if (!rating || rating < 1 || rating > 5) {
               showMessage('Please select a rating');
               return;
             }
-            
+
             const result = await submitReview(placeId, reviewText, rating);
             if (result.success) {
               reviewForm.reset();
               setTimeout(() => fetchReviews(placeId), 1000);
+              window.location.href = `place.html?place_id=${placeId}`
             }
           });
         }
       }
       break;
-      
+
     case 'add_review.html':
       if (!token) {
         window.location.href = 'index.html';
         return;
       }
-      
+
       const reviewPlaceId = getUrlParam('id');
+      console.log(reviewPlaceId)
       if (!reviewPlaceId) {
         window.location.href = 'index.html';
         return;
       }
-      
+
       const addReviewForm = document.getElementById('review-form');
       if (addReviewForm) {
         addReviewForm.addEventListener('submit', async (e) => {
           e.preventDefault();
-          
+
           const reviewText = document.getElementById('review-text').value.trim();
           const rating = document.getElementById('rating').value;
-          
+
           if (!reviewText || !rating) {
             showMessage('Please fill all fields');
             return;
           }
-          
+
           const result = await submitReview(reviewPlaceId, reviewText, rating);
           if (result.success) {
             setTimeout(() => {
@@ -438,3 +474,27 @@ const initPage = async () => {
 
 // === INITIALIZATION ===
 document.addEventListener('DOMContentLoaded', initPage);
+
+
+
+
+
+
+
+
+async function loginUser(email, password) {
+  const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email, password })
+  });
+  if (response.ok) {
+    const data = await response.json();
+    document.cookie = `token=${data.access_token}; path=/`;
+    window.location.href = 'index.html';
+  } else {
+    alert('Login failed: ' + response.statusText);
+  }
+}
