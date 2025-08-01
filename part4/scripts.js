@@ -61,6 +61,28 @@ const apiRequest = async (endpoint, options = {}) => {
   }
 };
 
+const postRequest = async (endpoint, options={}) => {
+  console.log(options.body);
+  const config = {
+    "method": "POST",
+    "headers": { 'Content-Type': 'application/json' },
+    "body": options.body
+  };
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  try {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error('API Request failed:', error);
+    throw error;
+  }
+};
+
 const getUrlParam = (param) => new URLSearchParams(window.location.search).get(param);
 
 // === AUTHENTICATION ===
@@ -329,8 +351,7 @@ const displayReviews = (reviews) => {
 const submitReview = async (place_id, title, text, ratingStr) => {
   const rating = parseInt(ratingStr);
   try {
-    await apiRequest(`/reviews/`, {
-      method: 'POST',
+    await postRequest(`/reviews/`, {
       body: JSON.stringify({
         title,
         text,
