@@ -27,11 +27,11 @@ class ReviewList(Resource):
         review_data = api.payload
         current_user = get_jwt_identity()
 
-        existing_user = facade.get_user(review_data["user_id"])
+        existing_user = facade.get_user(current_user["id"])
         if not existing_user:
             return {'error': 'User not found'}, 404
 
-        # review_data["user"] = existing_user
+        review_data["user_id"] = existing_user.id
 
         existing_place = facade.get_place(review_data["place_id"])
         if not existing_place:
