@@ -326,13 +326,16 @@ const displayReviews = (reviews) => {
   `).join('');
 };
 
-const submitReview = async (placeId, reviewText, rating) => {
+const submitReview = async (place_id, title, text, ratingStr) => {
+  const rating = parseInt(ratingStr);
   try {
-    await apiRequest(`/places/${placeId}/reviews`, {
+    await apiRequest(`/reviews/`, {
       method: 'POST',
       body: JSON.stringify({
-        comment: reviewText,
-        rating: parseInt(rating)
+        title,
+        text,
+        rating,
+        place_id
       })
     });
 
@@ -412,6 +415,8 @@ const initPage = async () => {
 
             const reviewText = document.getElementById('review-text').value.trim();
             const rating = document.getElementById('rating').value;
+            const title = document.getElementById('review-title').value;
+            console.log('123')
 
             if (!reviewText) {
               showMessage('Please enter a review');
@@ -423,7 +428,7 @@ const initPage = async () => {
               return;
             }
 
-            const result = await submitReview(placeId, reviewText, rating);
+            const result = await submitReview(placeId, title, reviewText, rating);
             if (result.success) {
               reviewForm.reset();
               setTimeout(() => fetchReviews(placeId), 1000);
@@ -454,13 +459,14 @@ const initPage = async () => {
 
           const reviewText = document.getElementById('review-text').value.trim();
           const rating = document.getElementById('rating').value;
+          const title = document.getElementById('review-title').value;
 
           if (!reviewText || !rating) {
             showMessage('Please fill all fields');
             return;
           }
 
-          const result = await submitReview(reviewPlaceId, reviewText, rating);
+          const result = await submitReview(reviewPlaceId, title, reviewText, rating);
           if (result.success) {
             setTimeout(() => {
               window.location.href = `place.html?id=${reviewPlaceId}`;
